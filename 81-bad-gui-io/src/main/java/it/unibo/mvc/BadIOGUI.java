@@ -42,7 +42,13 @@ public class BadIOGUI {
     public BadIOGUI() {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
+        final JPanel center = new JPanel();
+        center.setLayout(new BoxLayout(center, BoxLayout.X_AXIS));
         final JButton write = new JButton("Write on file");
+        center.add(write);
+        final JButton read = new JButton("Read from file");
+        center.add(read);
+        canvas.add(center, BorderLayout.CENTER);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         /*
@@ -61,6 +67,20 @@ public class BadIOGUI {
                 try (PrintStream ps = new PrintStream(PATH)) {
                     ps.print(randomGenerator.nextInt());
                 } catch (FileNotFoundException e1) {
+                    JOptionPane.showMessageDialog(frame, e1, "Error", JOptionPane.ERROR_MESSAGE);
+                    e1.printStackTrace();
+                }
+            }
+        });
+        read.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                try {
+                    final List<String> lines = Files.readAllLines(new File(PATH).toPath());
+                    for (final String line: lines) {
+                        System.out.println(line);
+                    }
+                } catch (IOException e1) {
                     JOptionPane.showMessageDialog(frame, e1, "Error", JOptionPane.ERROR_MESSAGE);
                     e1.printStackTrace();
                 }
@@ -87,6 +107,7 @@ public class BadIOGUI {
          * on screen. Results may vary, but it is generally the best choice.
          */
         frame.setLocationByPlatform(true);
+        frame.pack();
         /*
          * OK, ready to push the frame onscreen
          */
