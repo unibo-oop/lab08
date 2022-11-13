@@ -37,11 +37,5 @@ An example of configuration file is available in the res folder.
 
 ## Multiple views
 
-* Modify the architecture in such a way that multiple views are supported at the same time.
-* Develop two new views (classes extending `DrawNumberView`):
-  one that writes the match log on file, another that writes on stdout.
-  Those views are *output only* (they do not send new input to the controller).
-* Extend the controller to support multiple views.
-  To doing so, make sure that the controller has a list of views (and not a single one),
-  and that it notifies all of them (for instance with a `for` cicle) every time a new event should be displayed.
+* Notice that the architecture allows multiple views to be attached at runtime.
 * Attach at the same time two graphical views, the file logger, and the console view, and verify that the application works as expected
