@@ -1,23 +1,22 @@
 package it.unibo.mvc;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.Random;
-
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  * This class is a simple application that writes a random number on a file.
@@ -30,7 +29,7 @@ public class BadIOGUI {
 
     private static final String TITLE = "A very simple GUI application";
     private static final String PATH = System.getProperty("user.home")
-            + System.getProperty("file.separator")
+            + File.separator
             + BadIOGUI.class.getSimpleName() + ".txt";
     private static final int PROPORTION = 5;
     private final Random randomGenerator = new Random();
@@ -64,11 +63,11 @@ public class BadIOGUI {
                  * operation. I/O operations may take a long time, during which
                  * your UI becomes completely unresponsive.
                  */
-                try (PrintStream ps = new PrintStream(PATH)) {
+                try (PrintStream ps = new PrintStream(PATH, StandardCharsets.UTF_8)) {
                     ps.print(randomGenerator.nextInt());
-                } catch (FileNotFoundException e1) {
+                } catch (IOException e1) {
                     JOptionPane.showMessageDialog(frame, e1, "Error", JOptionPane.ERROR_MESSAGE);
-                    e1.printStackTrace();
+                    e1.printStackTrace(); // NOPMD: allowed as this is just an exercise
                 }
             }
         });
@@ -78,11 +77,11 @@ public class BadIOGUI {
                 try {
                     final List<String> lines = Files.readAllLines(new File(PATH).toPath());
                     for (final String line: lines) {
-                        System.out.println(line);
+                        System.out.println(line); // NOPMD: allowed as this is just an exercise
                     }
                 } catch (IOException e1) {
                     JOptionPane.showMessageDialog(frame, e1, "Error", JOptionPane.ERROR_MESSAGE);
-                    e1.printStackTrace();
+                    e1.printStackTrace(); // NOPMD: allowed as this is just an exercise
                 }
             }
         });

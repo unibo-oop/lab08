@@ -3,6 +3,7 @@ package it.unibo.mvc;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 
 /**
  *
@@ -10,10 +11,9 @@ import java.io.PrintStream;
 public class Controller {
 
     private static final String HOME = System.getProperty("user.home");
-    private static final String SEPARATOR = System.getProperty("file.separator");
     private static final String DEFAULT_FILE = "output.txt";
 
-    private File dest = new File(HOME + SEPARATOR + DEFAULT_FILE);
+    private File dest = new File(HOME + File.separator + DEFAULT_FILE);
 
     /**
      * @return the current file
@@ -38,7 +38,7 @@ public class Controller {
      *             if the writing fails
      */
     public void save(final String text) throws IOException {
-        try (PrintStream out = new PrintStream(dest)) {
+        try (PrintStream out = new PrintStream(dest, StandardCharsets.UTF_8)) {
             out.println(text);
         }
     }

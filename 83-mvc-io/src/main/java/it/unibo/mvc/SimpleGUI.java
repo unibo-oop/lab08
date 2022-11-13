@@ -1,5 +1,7 @@
 package it.unibo.mvc;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -30,6 +32,10 @@ public final class SimpleGUI {
      * builds a new {@link SimpleGUI}.
      * @param controller the controller instance.
      */
+    @SuppressFBWarnings(
+        value = { "EI_EXPOSE_REP2" },
+        justification = "The controller is designed to be manipulated this way."
+    )
     public SimpleGUI(final Controller controller) {
         this.controller = controller;
         final JPanel canvas = new JPanel();

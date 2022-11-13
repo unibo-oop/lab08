@@ -1,5 +1,6 @@
 package it.unibo.mvc;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -25,7 +26,7 @@ public final class SimpleController implements Controller {
 
     @Override
     public List<String> getPrintedStringsHistory() {
-        return stringHistory;
+        return Collections.unmodifiableList(stringHistory);
     }
 
     @Override
@@ -34,7 +35,7 @@ public final class SimpleController implements Controller {
             throw new IllegalStateException("There is no string set");
         }
         stringHistory.add(this.nextString);
-        System.out.println(this.nextString);
+        System.out.println(this.nextString); // NOPMD: allowed in exercises
     }
 
 }
