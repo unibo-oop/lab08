@@ -20,12 +20,12 @@ Once the `Controller` is done, implement `SimpleGUI` class in such a way that:
 
 1. It has a main method that starts the graphical application
 2. In its constructor, sets up the whole view
-3. The graphical interface consists of a `JTextArea` with a button "Save" right below (see "ex02.png" for the expected result). 
+3. The graphical interface consists of a `JTextArea` with a button "Save" right below (see `src/test/resources/ex02.png` for the expected result). 
 4. SUGGESTION: Use a `JPanel` with `BorderLayout`
 5. By default, if the graphical interface is closed the program must exit (call `setDefaultCloseOperation`)
 6. The program asks the controller to save the file if the button "Save" gets pressed.
 
-Use "ex02.png" (in the res directory) to verify the expected aspect.
+See `src/test/resources/ex02.png` to verify the expected aspect.
 
 Finally, implement `SimpleGUIWithFileChooser` class as follows:
 
@@ -41,3 +41,4 @@ Otherwise, a message dialog should be shown telling the user that an error has o
 Suggestion: do not force the controller to update the UI: in this example the UI knows when should be updated, so
 try to keep things separated.
 
+See `src/test/resources/ex03.png` to verify the expected aspect.
