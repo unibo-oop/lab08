@@ -11,3 +11,7 @@ repositories {
 application {
     mainClass.set("it.unibo.mvc.SimpleGUI")
 }
+
+tasks.javadoc {
+    isFailOnError = false
+}

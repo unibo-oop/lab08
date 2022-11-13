@@ -6,7 +6,7 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 
 /**
- *
+ * Application controller. Performs the I/O.
  */
 public class Controller {
 
@@ -16,6 +16,8 @@ public class Controller {
     private File dest = new File(HOME + File.separator + DEFAULT_FILE);
 
     /**
+     * Returns the current file.
+     *
      * @return the current file
      */
     public File getCurrentFile() {
@@ -23,6 +25,8 @@ public class Controller {
     }
 
     /**
+     * Returns the current file path.
+     *
      * @return the current file path
      */
     public String getCurrentFilePath() {
@@ -44,6 +48,8 @@ public class Controller {
     }
 
     /**
+     * Sets a new destination file.
+     *
      * @param file
      *            the file where to write
      */
@@ -57,6 +63,8 @@ public class Controller {
     }
 
     /**
+     * Sets a new destination file.
+     *
      * @param file
      *            the file where to write
      */

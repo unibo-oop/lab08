@@ -57,6 +57,8 @@ public final class SimpleGUI {
     }
 
     /**
+     * Launches the application.
+     *
      * @param a
      *            unused
      */

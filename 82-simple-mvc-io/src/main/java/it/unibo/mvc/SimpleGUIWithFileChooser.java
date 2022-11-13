@@ -90,6 +90,8 @@ public final class SimpleGUIWithFileChooser {
     }
 
     /**
+     * Launches the application.
+     *
      * @param a
      *            unused
      */

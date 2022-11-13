@@ -36,7 +36,7 @@ public class BadIOGUI {
     private final JFrame frame = new JFrame(TITLE);
 
     /**
-     * 
+     * Creates a new BadIOGUI.
      */
     public BadIOGUI() {
         final JPanel canvas = new JPanel();
@@ -114,6 +114,8 @@ public class BadIOGUI {
     }
 
     /**
+     * Launches the application.
+     *
      * @param args ignored
      */
     public static void main(final String... args) {
