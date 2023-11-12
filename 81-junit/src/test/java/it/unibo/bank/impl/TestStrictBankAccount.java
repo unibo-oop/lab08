@@ -56,7 +56,7 @@ public class TestStrictBankAccount {
         }
     }
 
-    // 4. Test withdrawing more money than it is in the account
+    // 5. Test withdrawing more money than it is in the account
     @Test
     public void testWithdrawingTooMuch() {
         try {
