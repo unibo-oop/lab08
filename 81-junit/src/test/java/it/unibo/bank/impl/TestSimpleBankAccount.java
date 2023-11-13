@@ -6,6 +6,10 @@ import org.junit.jupiter.api.Assertions;
 import it.unibo.bank.api.AccountHolder;
 import it.unibo.bank.api.BankAccount;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class TestSimpleBankAccount {
     private AccountHolder mRossi;
     private AccountHolder aBianchi;
@@ -26,9 +30,9 @@ public class TestSimpleBankAccount {
      */
     @Test
     public void testBankAccountInitialization() {
-        Assertions.assertEquals(0.0, bankAccount.getBalance());
-        Assertions.assertEquals(0, bankAccount.getTransactionsCount());
-        Assertions.assertEquals(mRossi, bankAccount.getAccountHolder());
+        assertEquals(0.0, bankAccount.getBalance());
+        assertEquals(0, bankAccount.getTransactionsCount());
+        assertEquals(mRossi, bankAccount.getAccountHolder());
     }
 
     /**
@@ -37,13 +41,13 @@ public class TestSimpleBankAccount {
     @Test
     public void testBankAccountDeposit() {
         int expectedValue = 0;
-        Assertions.assertFalse(bankAccount.getTransactionsCount() > 0);
+        assertFalse(bankAccount.getTransactionsCount() > 0);
         for(int i = 0; i < 10; i++) {
             expectedValue += i * 100;
             bankAccount.deposit(mRossi.getUserID(), i * 100);
         }
-        Assertions.assertEquals(expectedValue, bankAccount.getBalance());
-        Assertions.assertTrue(bankAccount.getTransactionsCount() > 0);
+        assertEquals(expectedValue, bankAccount.getBalance());
+        assertTrue(bankAccount.getTransactionsCount() > 0);
     }
 
     /**
@@ -55,7 +59,7 @@ public class TestSimpleBankAccount {
             bankAccount.deposit(aBianchi.getUserID(), 10000);
             Assertions.fail();
         } catch (IllegalArgumentException e) {
-            Assertions.assertEquals("ID not corresponding: cannot perform transaction", e.getMessage());
+            assertEquals("ID not corresponding: cannot perform transaction", e.getMessage());
         }
         // Alternative (with reflection): Assertions.assertThrows
     }

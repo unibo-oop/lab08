@@ -2,16 +2,14 @@ package it.unibo.bank.impl;
 
 import it.unibo.bank.api.AccountHolder;
 import it.unibo.bank.api.BankAccount;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static it.unibo.bank.impl.SimpleBankAccount.*;
-import static it.unibo.bank.impl.SimpleBankAccount.ATM_TRANSACTION_FEE;
+import static it.unibo.bank.impl.SimpleBankAccount.MANAGEMENT_FEE;
 import static it.unibo.bank.impl.StrictBankAccount.TRANSACTION_FEE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestStrictBankAccount {
 
@@ -39,10 +37,17 @@ public class TestStrictBankAccount {
     // 3. Perform a deposit of 100€, compute the management fees, and check that the balance is correctly reduced.
     @Test
     public void testManagementFees() {
+        assertTransactionsAre(0);
         bankAccount.deposit(mRossi.getUserID(), INITIAL_AMOUNT);
+        assertTransactionsAre(1);
         assertEquals(INITIAL_AMOUNT, bankAccount.getBalance());
         bankAccount.chargeManagementFees(mRossi.getUserID());
+        assertTransactionsAre(0);
         assertEquals(INITIAL_AMOUNT - TRANSACTION_FEE - MANAGEMENT_FEE, bankAccount.getBalance());
+    }
+
+    private void assertTransactionsAre(final int expectedTransactions) {
+        assertEquals(expectedTransactions, bankAccount.getTransactionsCount());
     }
 
     // 4. Test the withdraw of a negative value
@@ -52,7 +57,7 @@ public class TestStrictBankAccount {
             bankAccount.withdraw(mRossi.getUserID(), -INITIAL_AMOUNT);
         } catch (IllegalArgumentException e) {
             assertNotNull(e.getMessage());
-            assertTrue(e.getMessage().length() > 1);
+            assertFalse(e.getMessage().isBlank());
         }
     }
 
@@ -63,7 +68,7 @@ public class TestStrictBankAccount {
             bankAccount.withdraw(mRossi.getUserID(), INITIAL_AMOUNT);
         } catch (IllegalArgumentException e) {
             assertNotNull(e.getMessage());
-            assertTrue(e.getMessage().length() > 1);
+            assertFalse(e.getMessage().isBlank());
         }
     }
 }
