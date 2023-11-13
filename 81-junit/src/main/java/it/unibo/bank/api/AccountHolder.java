@@ -1,7 +1,9 @@
 package it.unibo.bank.api;
 
+/**
+ * A BankAccount holder.
+ */
 public class AccountHolder {
-
     private final String name;
     private final String surname;
     private final int id;
@@ -12,18 +14,28 @@ public class AccountHolder {
         this.id = id;
     }
 
+    /**
+     * @return the name of the bank account holder.
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * @return the surname of the bank account holder.
+     */
     public String getSurname() {
         return this.surname;
     }
 
+    /**
+     * @return the user id of the bank account holder.
+     */
     public int getUserID() {
         return this.id;
     }
 
+    @Override
     public String toString() {
         return "AccountHolder [name=" + this.name
             + ", surname=" + this.surname
