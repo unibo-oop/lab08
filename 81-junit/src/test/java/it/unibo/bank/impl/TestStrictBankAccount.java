@@ -19,13 +19,18 @@ public class TestStrictBankAccount {
     private AccountHolder mRossi;
     private BankAccount bankAccount;
 
+    /**
+     * Prepare the tests.
+     */
     @BeforeEach
     public void setUp() {
         mRossi = new AccountHolder("Mario", "Rossi", 1);
         bankAccount = new StrictBankAccount(mRossi, 0.0);
     }
 
-    // 2. Test the initial state of the StrictBankAccount
+    /**
+     * Test the initial state of the StrictBankAccount.
+     */
     @Test
     public void testInitialization() {
         assertEquals(0.0, bankAccount.getBalance());
@@ -33,8 +38,9 @@ public class TestStrictBankAccount {
         assertEquals(mRossi, bankAccount.getAccountHolder());
     }
 
-
-    // 3. Perform a deposit of 100€, compute the management fees, and check that the balance is correctly reduced.
+    /**
+     * Perform a deposit of 100€, compute the management fees, and check that the balance is correctly reduced.
+     */
     @Test
     public void testManagementFees() {
         assertTransactionsAre(0);
@@ -50,7 +56,9 @@ public class TestStrictBankAccount {
         assertEquals(expectedTransactions, bankAccount.getTransactionsCount());
     }
 
-    // 4. Test the withdraw of a negative value
+    /**
+     * Test that withdrawing a negative amount causes a failure.
+     */
     @Test
     public void testNegativeWithdraw() {
         try {
@@ -61,7 +69,9 @@ public class TestStrictBankAccount {
         }
     }
 
-    // 5. Test withdrawing more money than it is in the account
+    /**
+     * Test that withdrawing more money than it is in the account is not allowed.
+     */
     @Test
     public void testWithdrawingTooMuch() {
         try {
