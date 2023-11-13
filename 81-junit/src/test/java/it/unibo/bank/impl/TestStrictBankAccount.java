@@ -15,7 +15,7 @@ public class TestStrictBankAccount {
 
     private final static int INITIAL_AMOUNT = 100;
 
-    // 1. Create a new AccountHolder and a StrictBankAccount for it each time tests are executed.
+    // Create a new AccountHolder and a StrictBankAccount for it each time tests are executed.
     private AccountHolder mRossi;
     private BankAccount bankAccount;
 
