@@ -9,13 +9,19 @@ import it.unibo.deathnote.impl.DeathNoteImplementation;
 
 import static it.unibo.deathnote.api.DeathNote.RULES;
 import static java.lang.Thread.sleep;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class TestDeathNote {
 
     private DeathNote deathNote;
-    private static String DANILO_PIANINI = "Danilo Pianini";
-    private static String LIGHT_YAGAMI = "Light Yagami";
+    private static final String DANILO_PIANINI = "Danilo Pianini";
+    private static final String LIGHT_YAGAMI = "Light Yagami";
+    private static final int INVALID_CAUSE_TIME = 100;
+    private static final int INVALID_DETAILS_TIME = 6000 + INVALID_CAUSE_TIME;
 
     @BeforeEach
     void init() {
@@ -84,7 +90,7 @@ class TestDeathNote {
         // Assuming the method can be executed in less than 40ms
         assertEquals("karting accident", deathNote.getDeathCause(DANILO_PIANINI));
         // Wait for more than 40 ms
-        sleep(100);
+        sleep(INVALID_CAUSE_TIME);
         assertFalse(deathNote.writeDeathCause("Spontaneous human combustion"));
         assertEquals("karting accident", deathNote.getDeathCause(DANILO_PIANINI));
     }
@@ -110,7 +116,7 @@ class TestDeathNote {
         assertEquals("ran for too long", deathNote.getDeathDetails(LIGHT_YAGAMI));
         // Wait for more than 6040 ms
         deathNote.writeName(DANILO_PIANINI);
-        sleep(6100);
+        sleep(INVALID_DETAILS_TIME);
         assertFalse(deathNote.writeDetails("wrote many tests before dying"));
         assertEquals("", deathNote.getDeathDetails(DANILO_PIANINI));
     }
@@ -118,11 +124,11 @@ class TestDeathNote {
     static void assertThrows(final RuntimeExceptionThrower exceptionThrower) {
         try {
             exceptionThrower.run();
-            fail();
+            fail("Exception was expected, but not thrown");
         } catch (IllegalStateException | IllegalArgumentException e) {
             assertTrue(
-                exceptionThrower instanceof IllegalArgumentThrower && e instanceof IllegalArgumentException
-                || exceptionThrower instanceof IllegalStateThrower && e instanceof IllegalStateException
+                exceptionThrower instanceof IllegalArgumentThrower && e instanceof IllegalArgumentException // NOPMD
+                || exceptionThrower instanceof IllegalStateThrower && e instanceof IllegalStateException // NOPMD
             );
             assertNotNull(e.getMessage());
             assertFalse(e.getMessage().isBlank());

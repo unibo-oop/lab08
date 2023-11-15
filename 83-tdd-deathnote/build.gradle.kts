@@ -1,5 +1,6 @@
 plugins {
     java
+    id("org.danilopianini.gradle-java-qa") version "1.25.0"
 }
 
 tasks.javadoc {

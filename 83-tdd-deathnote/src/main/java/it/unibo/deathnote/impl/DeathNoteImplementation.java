@@ -6,45 +6,61 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class DeathNoteImplementation implements DeathNote {
+/**
+ * This class implements the DeathNote interface.
+ */
+public final class DeathNoteImplementation implements DeathNote {
 
     private final Map<String, Death> deaths = new LinkedHashMap<>(); // Predictable iteration order
     private String lastWrittenName;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public String getRule(int ruleNumber) {
+    public String getRule(final int ruleNumber) {
         if (ruleNumber < 1 || ruleNumber > RULES.size()) {
             throw new IllegalArgumentException("Rule index " + ruleNumber + " does not exist");
         }
         return RULES.get(ruleNumber - 1);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void writeName(String name) {
+    public void writeName(final String name) {
         Objects.requireNonNull(name);
         lastWrittenName = name;
         deaths.put(name, new Death());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean writeDeathCause(final String cause) {
         return updateDeath(
             cause,
             new DeathTransformer() {
                 @Override
-                public Death call(Death input) {
+                public Death call(final Death input) {
                     return input.writeCause(cause);
                 }
-            });
+            }
+        );
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean writeDetails(final String details) {
         return updateDeath(
             details,
             new DeathTransformer() {
                 @Override
-                public Death call(Death input) {
+                public Death call(final Death input) {
                     return input.writeDetails(details);
                 }
             }
@@ -74,7 +90,7 @@ public class DeathNoteImplementation implements DeathNote {
         return death;
     }
 
-    private boolean updateDeath(String update, DeathTransformer operation) {
+    private boolean updateDeath(final String update, final DeathTransformer operation) {
         if (lastWrittenName == null) {
             throw new IllegalStateException("No name written yet");
         }
@@ -116,20 +132,20 @@ public class DeathNoteImplementation implements DeathNote {
             this(DEFAULT_CAUSE, "");
         }
 
-        private Death writeCause(final String cause) {
+        Death writeCause(final String cause) {
             return System.currentTimeMillis() < timeOfDeath + VALID_CAUSE_TIMEOUT
                 ? new Death(cause, this.details)
                 : this;
         }
 
-        private Death writeDetails(final String details) {
+        Death writeDetails(final String details) {
             return System.currentTimeMillis() < timeOfDeath + VALID_DETAILS_TIMEOUT
                 ? new Death(this.cause, details)
                 : this;
         }
 
         @Override
-        public boolean equals(Object obj) {
+        public boolean equals(final Object obj) {
             if (this == obj) {
                 return true;
             }

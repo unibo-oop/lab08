@@ -12,7 +12,7 @@ public interface DeathNote {
     /**
      * Returns the list of rules for this DeathNote.
      */
-    static List<String> RULES = List.of(
+    List<String> RULES = List.of(
         """
         The human whose name is written in this note shall die.
         """,
