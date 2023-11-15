@@ -1,7 +1,7 @@
 package it.unibo.bank.api;
 
 /**
- * Representation of a Banking account
+ * Representation of a Banking account.
  */
 public interface BankAccount {
     /**
@@ -10,6 +10,7 @@ public interface BankAccount {
      * computed, it directly collects the amount from the balance.
      * It also resets the transaction number of the bank account.
      * The operation is performed only if the user ID is corresponding.
+     *
      * @param id the account holder identifier.
      * @throws IllegalArgumentException if the user ID does not correspond.
      */
@@ -18,6 +19,7 @@ public interface BankAccount {
     /**
      * Increments the number of transactions and adds the amount to the bank account's balance.
      * The deposit is performed only if the user ID is corresponding.
+     *
      * @param id the account holder identifier.
      * @param amount the amount of money to deposit into the bank account.
      * @throws IllegalArgumentException if the user ID does not correspond.

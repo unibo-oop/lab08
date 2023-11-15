@@ -11,7 +11,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TestSimpleBankAccount {
+/**
+ * Test class for the {@link SimpleBankAccount} class.
+ */
+class TestSimpleBankAccount {
     private AccountHolder mRossi;
     private AccountHolder aBianchi;
     private BankAccount bankAccount;
@@ -23,7 +26,7 @@ public class TestSimpleBankAccount {
      * Configuration step: this is performed BEFORE each test.
      */
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         this.mRossi = new AccountHolder("Mario", "Rossi", 1);
         this.aBianchi = new AccountHolder("Andrea", "Bianchi", 2);
         this.bankAccount = new SimpleBankAccount(mRossi, 0.0);
@@ -33,7 +36,7 @@ public class TestSimpleBankAccount {
      * Check that the initialization of the BankAccount is created with the correct values.
      */
     @Test
-    public void testBankAccountInitialization() {
+    void testBankAccountInitialization() {
         assertEquals(0.0, bankAccount.getBalance());
         assertEquals(0, bankAccount.getTransactionsCount());
         assertEquals(mRossi, bankAccount.getAccountHolder());
@@ -43,8 +46,8 @@ public class TestSimpleBankAccount {
      * Check that the deposit is performed correctly on the Bank Account.
      */
     @Test
-    public void testBankAccountDeposit() {
-        for(int i = 0; i < 10;) {
+    void testBankAccountDeposit() {
+        for (int i = 0; i < 10;) {
             assertEquals(i, bankAccount.getTransactionsCount());
             assertEquals(i * AMOUNT, bankAccount.getBalance());
             bankAccount.deposit(mRossi.getUserID(), AMOUNT);
@@ -58,9 +61,9 @@ public class TestSimpleBankAccount {
      * Checks that if the wrong AccountHolder id is given, the deposit will return an IllegalArgumentException.
      */
     @Test
-    public void testWrongBankAccountDeposit() {
+    void testWrongBankAccountDeposit() {
         try {
-            bankAccount.deposit(aBianchi.getUserID(), 10000);
+            bankAccount.deposit(aBianchi.getUserID(), AMOUNT);
             Assertions.fail("Depositing from a wrong account was possible, but should have thrown an exception");
         } catch (IllegalArgumentException e) {
             assertEquals(0, bankAccount.getBalance()); // No money was deposited, balance is consistent

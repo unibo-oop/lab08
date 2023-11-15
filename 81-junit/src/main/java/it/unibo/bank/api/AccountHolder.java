@@ -3,11 +3,17 @@ package it.unibo.bank.api;
 /**
  * A BankAccount holder.
  */
-public class AccountHolder {
+public final class AccountHolder {
     private final String name;
     private final String surname;
     private final int id;
 
+    /**
+     * Builds a new {@link AccountHolder}.
+     * @param name the name of the bank account holder.
+     * @param surname the surname of the bank account holder.
+     * @param id the user id of the bank account holder.
+     */
     public AccountHolder(final String name, final String surname, final int id) {
         this.name = name;
         this.surname = surname;

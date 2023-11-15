@@ -11,9 +11,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class TestStrictBankAccount {
+/**
+ * Test class for the {@link StrictBankAccount} class.
+ */
+class TestStrictBankAccount {
 
-    private final static int INITIAL_AMOUNT = 100;
+    private static final int INITIAL_AMOUNT = 100;
 
     // Create a new AccountHolder and a StrictBankAccount for it each time tests are executed.
     private AccountHolder mRossi;
@@ -23,7 +26,7 @@ public class TestStrictBankAccount {
      * Prepare the tests.
      */
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         mRossi = new AccountHolder("Mario", "Rossi", 1);
         bankAccount = new StrictBankAccount(mRossi, 0.0);
     }
@@ -32,7 +35,7 @@ public class TestStrictBankAccount {
      * Test the initial state of the StrictBankAccount.
      */
     @Test
-    public void testInitialization() {
+    void testInitialization() {
         assertEquals(0.0, bankAccount.getBalance());
         assertEquals(0, bankAccount.getTransactionsCount());
         assertEquals(mRossi, bankAccount.getAccountHolder());
@@ -42,7 +45,7 @@ public class TestStrictBankAccount {
      * Perform a deposit of 100€, compute the management fees, and check that the balance is correctly reduced.
      */
     @Test
-    public void testManagementFees() {
+    void testManagementFees() {
         assertTransactionsAre(0);
         bankAccount.deposit(mRossi.getUserID(), INITIAL_AMOUNT);
         assertTransactionsAre(1);
@@ -52,7 +55,7 @@ public class TestStrictBankAccount {
         assertEquals(INITIAL_AMOUNT - TRANSACTION_FEE - MANAGEMENT_FEE, bankAccount.getBalance());
     }
 
-    private void assertTransactionsAre(final int expectedTransactions) {
+    void assertTransactionsAre(final int expectedTransactions) {
         assertEquals(expectedTransactions, bankAccount.getTransactionsCount());
     }
 
@@ -60,7 +63,7 @@ public class TestStrictBankAccount {
      * Test that withdrawing a negative amount causes a failure.
      */
     @Test
-    public void testNegativeWithdraw() {
+    void testNegativeWithdraw() {
         try {
             bankAccount.withdraw(mRossi.getUserID(), -INITIAL_AMOUNT);
         } catch (IllegalArgumentException e) {
@@ -73,7 +76,7 @@ public class TestStrictBankAccount {
      * Test that withdrawing more money than it is in the account is not allowed.
      */
     @Test
-    public void testWithdrawingTooMuch() {
+    void testWithdrawingTooMuch() {
         try {
             bankAccount.withdraw(mRossi.getUserID(), INITIAL_AMOUNT);
         } catch (IllegalArgumentException e) {

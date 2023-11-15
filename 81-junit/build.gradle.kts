@@ -1,5 +1,6 @@
 plugins {
     java
+    id("org.danilopianini.gradle-java-qa") version "1.25.0"
 }
 
 tasks.javadoc {
@@ -16,6 +17,10 @@ dependencies {
 
     // Use JUnit Jupiter Engine for testing.
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.1")
+}
+
+spotbugs {
+    omitVisitors.set(listOf("UnreadFields"))
 }
 
 tasks.withType<Test> {
