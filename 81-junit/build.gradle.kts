@@ -1,6 +1,5 @@
 plugins {
     java
-    application
 }
 
 tasks.javadoc {
@@ -19,14 +18,7 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.1")
 }
 
-val mainClass: String by project
-
-application {
-    // The following allows to run with: ./gradlew -PmainClass=it.unibo.oop.MyMainClass run
-    mainClass.set(project.properties["mainClass"].toString())
-}
-
-val test by tasks.getting(Test::class) {
+tasks.withType<Test> {
     // Use junit platform for unit tests
     useJUnitPlatform()
     testLogging {
