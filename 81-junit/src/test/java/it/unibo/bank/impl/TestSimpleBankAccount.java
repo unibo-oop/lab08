@@ -8,12 +8,16 @@ import it.unibo.bank.api.BankAccount;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestSimpleBankAccount {
     private AccountHolder mRossi;
     private AccountHolder aBianchi;
     private BankAccount bankAccount;
+
+    private static final int AMOUNT = 100;
+    private static final int ACCEPTABLE_MESSAGE_LENGTH = 10;
 
     /**
      * Configuration step: this is performed BEFORE each test.
@@ -40,14 +44,14 @@ public class TestSimpleBankAccount {
      */
     @Test
     public void testBankAccountDeposit() {
-        int expectedValue = 0;
-        assertFalse(bankAccount.getTransactionsCount() > 0);
-        for(int i = 0; i < 10; i++) {
-            expectedValue += i * 100;
-            bankAccount.deposit(mRossi.getUserID(), i * 100);
+        for(int i = 0; i < 10;) {
+            assertEquals(i, bankAccount.getTransactionsCount());
+            assertEquals(i * AMOUNT, bankAccount.getBalance());
+            bankAccount.deposit(mRossi.getUserID(), AMOUNT);
+            i++;
+            assertEquals(i * AMOUNT, bankAccount.getBalance());
+            assertEquals(i, bankAccount.getTransactionsCount());
         }
-        assertEquals(expectedValue, bankAccount.getBalance());
-        assertTrue(bankAccount.getTransactionsCount() > 0);
     }
 
     /**
@@ -57,11 +61,20 @@ public class TestSimpleBankAccount {
     public void testWrongBankAccountDeposit() {
         try {
             bankAccount.deposit(aBianchi.getUserID(), 10000);
-            Assertions.fail();
+            Assertions.fail("Depositing from a wrong account was possible, but should have thrown an exception");
         } catch (IllegalArgumentException e) {
-            assertEquals("ID not corresponding: cannot perform transaction", e.getMessage());
+            assertEquals(0, bankAccount.getBalance()); // No money was deposited, balance is consistent
+            assertNotNull(e.getMessage()); // Non-null message
+            assertFalse(e.getMessage().isBlank()); // Not a blank or empty message
+            assertTrue(e.getMessage().length() >= ACCEPTABLE_MESSAGE_LENGTH); // A message with a decent length
         }
-        // Alternative (with reflection): Assertions.assertThrows
+        /*
+         * Conciser alternative
+         * (once you learn reflection, and preferably after you have learnt lambda expressions):
+         * Assertions.assertThrows
+         *
+         * Use only if you **already** know reflection and lambda expressions.
+         */
     }
 
 }
