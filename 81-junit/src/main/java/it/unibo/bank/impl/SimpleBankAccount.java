@@ -39,7 +39,7 @@ public class SimpleBankAccount implements BankAccount {
     @Override
     public void chargeManagementFees(final int id) {
         if (checkUser(id)) {
-            this.balance -= SimpleBankAccount.MANAGEMENT_FEE;
+            this.balance -= MANAGEMENT_FEE;
             resetTransactions();
         } else {
             throw new IllegalArgumentException("ID not corresponding: cannot charge management fees");
@@ -59,7 +59,7 @@ public class SimpleBankAccount implements BankAccount {
      */
     @Override
     public void depositFromATM(final int id, final double amount) {
-        this.deposit(id, amount - SimpleBankAccount.ATM_TRANSACTION_FEE);
+        this.deposit(id, amount - ATM_TRANSACTION_FEE);
     }
 
     /**
@@ -108,7 +108,7 @@ public class SimpleBankAccount implements BankAccount {
      */
     @Override
     public void withdrawFromATM(final int id, final double amount) {
-        this.withdraw(id, amount + SimpleBankAccount.ATM_TRANSACTION_FEE);
+        this.withdraw(id, amount + ATM_TRANSACTION_FEE);
     }
 
     /**

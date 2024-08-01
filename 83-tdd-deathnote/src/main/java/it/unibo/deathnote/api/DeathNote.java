@@ -111,6 +111,8 @@ public interface DeathNote {
     boolean writeDetails(String details);
 
     /**
+     * Provides the cause of death of the person with the given name.
+     *
      * @param name the name of the person whose death cause to return
      * @return the death cause of the person with the given name.
      * If the cause of death is not specified, the method will return "heart attack".
@@ -119,6 +121,8 @@ public interface DeathNote {
     String getDeathCause(String name);
 
     /**
+     * Provides the details of the death of the person with the given name.
+     *
      * @param name the name of the person whose death cause to return
      * @return the death details of the person with the given name,
      * or an empty string if no details have been provided.
@@ -127,6 +131,8 @@ public interface DeathNote {
     String getDeathDetails(String name);
 
     /**
+     * Checks if the given name is written in this DeathNote.
+     *
      * @param name the name of the person
      * @return true if the given name is written in this DeathNote, false otherwise
      */

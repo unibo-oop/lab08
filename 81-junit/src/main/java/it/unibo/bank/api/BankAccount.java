@@ -38,16 +38,22 @@ public interface BankAccount {
     void depositFromATM(int id, double amount);
 
     /**
+     * Account holder of this bank account.
+     *
      * @return the account holder of this bank account.
      */
     AccountHolder getAccountHolder();
 
     /**
+     * The balance of this bank account.
+     *
      * @return the balance of this bank account.
      */
     double getBalance();
 
     /**
+     * The number of transactions performed on this bank account.
+     *
      * @return the transactions count of this bank account.
      */
     int getTransactionsCount();

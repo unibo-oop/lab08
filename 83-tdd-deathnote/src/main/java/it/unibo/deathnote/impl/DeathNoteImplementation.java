@@ -11,8 +11,15 @@ import java.util.Objects;
  */
 public final class DeathNoteImplementation implements DeathNote {
 
-    private final Map<String, Death> deaths = new LinkedHashMap<>(); // Predictable iteration order
+    private final Map<String, Death> deaths;
     private String lastWrittenName;
+
+    /**
+     * A new Death Note, with no name written on it yet.
+     */
+    public DeathNoteImplementation() {
+        deaths = new LinkedHashMap<>();  // Predictable iteration order
+    }
 
     /**
      * {@inheritDoc}
