@@ -6,7 +6,7 @@ package it.unibo.mvc.model;
  */
 public final class Configuration {
 
-    private final int max; 
+    private final int max;
     private final int min;
     private final int attempts;
 
