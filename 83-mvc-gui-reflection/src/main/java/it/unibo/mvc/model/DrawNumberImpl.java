@@ -23,7 +23,7 @@ public final class DrawNumberImpl implements DrawNumber {
      * @throws IllegalStateException if the configuration is not consistent
      */
     public DrawNumberImpl() {
-        this(new Configuration.Builder().build());
+        this(Configuration.builder().build());
     }
 
     /**

@@ -7,7 +7,7 @@ public interface DrawNumberController {
 
     /**
      * Makes a guess.
-     * 
+     *
      * @param n the attempt
      */
     void newAttempt(int n);

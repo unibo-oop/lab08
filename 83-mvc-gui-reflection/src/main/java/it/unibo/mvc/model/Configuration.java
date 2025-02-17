@@ -1,6 +1,5 @@
 package it.unibo.mvc.model;
 
-
 /**
  * Encapsulates the concept of configuration.
  */
@@ -53,6 +52,15 @@ public final class Configuration {
     }
 
     /**
+     * Produces a new instance of the builder.
+     *
+     * @return a new instance of the builder
+     */
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    /**
      * Pattern <i>builder</i> used here because:
      * <ul>
      * <li>
@@ -73,7 +81,7 @@ public final class Configuration {
      * </li>
      * </ul>
      */
-    public static class Builder {
+    public static final class Builder {
 
         private static final int MIN = 0;
         private static final int MAX = 100;
@@ -84,36 +92,39 @@ public final class Configuration {
         private int attempts = ATTEMPTS;
         private boolean consumed;
 
+        private Builder() {
+        }
+
         /**
          * Sets the minimum value.
          *
-         * @param min the minimum value
+         * @param minimum the minimum value
          * @return this builder, for method chaining
          */
-        public Builder withMin(final int min) {
-            this.min = min;
+        public Builder withMin(final int minimum) {
+            this.min = minimum;
             return this;
         }
 
         /**
          * Sets the maximum value.
          *
-         * @param max the maximum value
+         * @param maximum the maximum value
          * @return this builder, for method chaining
          */
-        public Builder withMax(final int max) {
-            this.max = max;
+        public Builder withMax(final int maximum) {
+            this.max = maximum;
             return this;
         }
 
         /**
          * Sets the minimum number of attempts.
          *
-         * @param attempts the attempts count
+         * @param maxAttempts the attempts count
          * @return this builder, for method chaining
          */
-        public Builder withMaxAttempts(final int attempts) {
-            this.attempts = attempts;
+        public Builder withMaxAttempts(final int maxAttempts) {
+            this.attempts = maxAttempts;
             return this;
         }
 
@@ -122,7 +133,7 @@ public final class Configuration {
          *
          * @return a {@code Configuration}
          */
-        public final Configuration build() {
+        public Configuration build() {
             if (consumed) {
                 throw new IllegalStateException("The builder can only be used once");
             }
