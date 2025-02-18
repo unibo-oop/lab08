@@ -12,6 +12,8 @@ import java.util.Random;
 
 /**
  * This class is a simple application that writes a random number on a file.
+ *
+ * <p>
  * This application does not exploit the model-view-controller pattern, and as
  * such is just to be used to learn the basics, not as a template for your
  * applications.
