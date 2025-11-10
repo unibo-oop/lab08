@@ -24,5 +24,5 @@ tasks.withType<Test> {
     testLogging {
         events(*(TestLogEvent.values())) // events("passed", "skipped", "failed")
     }
-    testLogging.showStandardStreams = true
+    testLogging.showStandardStreams = true    
 }
