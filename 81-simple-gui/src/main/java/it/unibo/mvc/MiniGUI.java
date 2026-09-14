@@ -60,7 +60,7 @@ public class MiniGUI {
                  * Part 3
                  */
                 final int res = randomGenerator.nextInt();
-                System.out.println(res); // NOPMD
+                IO.println(res);
                 result.setText(RESULT_TXT_CONTENT + ": " + Integer.toString(res));
             }
         });
